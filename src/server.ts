@@ -43,7 +43,7 @@ import {filterImageFromURL, deleteLocalFiles, validateUrl } from './util/util';
     const { image_url } = req.query;
 
     // validate the url
-    const isValid: Boolean = await validateUrl(image_url.toString())
+    const isValid = await validateUrl(image_url.toString())
 
     if (!isValid) {
       res.status(403).json({
