@@ -114,5 +114,3 @@ async function isImageURL (url: string) {
     }
   });
 };
-
-exports.default = isImageURL;
