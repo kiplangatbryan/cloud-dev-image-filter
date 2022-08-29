@@ -63,7 +63,11 @@ import {filterImageFromURL, deleteLocalFiles, validateUrl } from './util/util';
     })
   
   })
-  
+
+  // handle hardcore errors
+  process.on('uncaughtException', (err) => {
+    console.log(err.message)
+  });
 
   // Start the Server
   app.listen( port, () => {
