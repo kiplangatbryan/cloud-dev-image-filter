@@ -42,7 +42,7 @@ export async function deleteLocalFiles(files: Array<string>) {
 }
 
 
-export async function validateUrl(imageUrl: string) {
+export async function validateUrl(imageUrl: string): Promise<Boolean> {
   return isImageURL(imageUrl)
 }
 
@@ -76,7 +76,7 @@ function CheckByRequest(url: string) {
   });
 }
 
-async function isImageURL (url: string) {
+async function isImageURL (url: string): Promise<Boolean> {
   return new Promise(function (resolve) {
     try {
       // When URL Not Exists

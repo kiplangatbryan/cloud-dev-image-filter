@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "be581e5d-1cf9-4339-910b-9c16a7de9c7b",
+		"name": "image-filter-prod-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15970761"
+	},
+	"item": [
+		{
+			"name": "check health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check valid",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/filteredimage?image_url=https://jenmulligandesign.com/wp-content/uploads/2017/04/gratisography-free-stock-photos.jpg",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "https://jenmulligandesign.com/wp-content/uploads/2017/04/gratisography-free-stock-photos.jpg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check invalid",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// check for health",
+					"pm.test('check_health', function(){",
+					"    pm.response.to.have.status(200);",
+					"})",
+					"",
+					"",
+					"pm.test('invalid_image_url', function(){",
+					"    pm.response.to.have.status(403);",
+					"})",
+					"",
+					"",
+					"",
+					"pm.test('valid_image_resolve', function(){",
+					"    pm.response.to.have.status(201);",
+					"})"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "http://image-filter-starter-code2-dev.us-east-1.elasticbeanstalk.com",
+			"type": "string"
+		}
+	]
+}
